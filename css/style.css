@@ -76,6 +76,54 @@ h1, h2, h3, h4, h5, h6 { color: var(--text-color); }
 .navbar.scrolled .navbar-toggler { border-color: rgba(0,0,0,0.25); }
 .navbar.scrolled .navbar-toggler-icon { filter: invert(0%); }
 
+/* Custom mobile hamburger (glass look) */
+.navbar .navbar-toggler {
+    border: none;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 8px 10px;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+.navbar-dark .navbar-toggler:hover { background: rgba(255,255,255,0.28); }
+.navbar-dark .navbar-toggler:focus { box-shadow: 0 0 0 2px rgba(255,255,255,0.25); }
+
+/* Replace default icon with minimal bars */
+.navbar .navbar-toggler .navbar-toggler-icon {
+    background-image: none;
+    width: 24px; height: 18px; position: relative; display: inline-block;
+}
+.navbar .navbar-toggler .navbar-toggler-icon::before,
+.navbar .navbar-toggler .navbar-toggler-icon::after,
+.navbar .navbar-toggler .navbar-toggler-icon span {
+    content: "";
+    position: absolute; left: 0; right: 0; height: 2px; border-radius: 2px;
+    background: #ffffff;
+    transition: transform 0.25s ease, opacity 0.25s ease, background-color 0.25s ease;
+}
+.navbar .navbar-toggler .navbar-toggler-icon::before { top: 0; }
+.navbar .navbar-toggler .navbar-toggler-icon span { top: 8px; }
+.navbar .navbar-toggler .navbar-toggler-icon::after { bottom: 0; }
+
+/* Dark-on-light when scrolled */
+.navbar.scrolled .navbar-toggler .navbar-toggler-icon::before,
+.navbar.scrolled .navbar-toggler .navbar-toggler-icon::after,
+.navbar.scrolled .navbar-toggler .navbar-toggler-icon span {
+    background: #111111;
+}
+
+/* Animate to X when expanded */
+.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+    transform: translateY(8px) rotate(45deg);
+}
+.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+    transform: translateY(-8px) rotate(-45deg);
+}
+.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon span {
+    opacity: 0;
+}
+
 
 /* Hero Section */
 #hero {
@@ -237,10 +285,12 @@ a:hover { color: #000000; }
 
 /* Contact Section */
 #contact .info-box {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: 40px 92px 1fr; /* icon | label | value */
+    align-items: start;
+    column-gap: 12px;
+    row-gap: 6px;
+    padding: 16px 18px;
     background: var(--surface-1);
     border: 1px solid var(--border-color);
     border-radius: 10px;
@@ -249,8 +299,7 @@ a:hover { color: #000000; }
 #contact .info-box i {
     font-size: 20px;
     color: var(--primary-color);
-    width: 40px;
-    height: 40px;
+    width: 40px; height: 40px;
     border-radius: 50%;
     background: var(--surface-2);
     display: flex;
@@ -258,8 +307,24 @@ a:hover { color: #000000; }
     align-items: center;
 }
 #contact .info-box h3 {
-    font-size: 1.2rem;
-    margin-bottom: 5px;
+    font-size: 1.05rem;
+    margin: 0; line-height: 1.4;
+    white-space: nowrap; /* 라벨은 줄바꿈 방지 */
+}
+/* 값(링크/텍스트) 안전 줄바꿈 */
+#contact .info-box p,
+#contact .info-box a {
+    margin: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    color: var(--text-color);
+}
+#contact .info-box a:hover { color: var(--primary-color); }
+
+/* 초소형 화면에서는 라벨과 값이 아래로 스택 */
+@media (max-width: 400px) {
+    #contact .info-box { grid-template-columns: 36px 1fr; }
+    #contact .info-box h3 { grid-column: 2 / 3; }
 }
 
 /* Footer */
