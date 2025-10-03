@@ -346,6 +346,8 @@ a:hover { color: #000000; }
 @media (max-width: 400px) {
     #contact .info-box { grid-template-columns: 36px 1fr; }
     #contact .info-box h3 { grid-column: 2 / 3; }
+    #contact .info-box p,
+    #contact .info-box a { grid-column: 2 / 3; }
 }
 
 /* Footer */
