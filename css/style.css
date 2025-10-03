@@ -326,6 +326,10 @@ a:hover { color: #000000; }
     white-space: nowrap; /* 라벨은 줄바꿈 방지 */
     word-break: keep-all; /* 한글 세로 깨짐 방지 */
 }
+/* 라벨은 2열, 값은 3열로 명시 배치 */
+#contact .info-box h3 { grid-column: 2 / 3; }
+#contact .info-box p,
+#contact .info-box a { grid-column: 3 / 4; }
 /* 값(링크/텍스트) 안전 줄바꿈 */
 #contact .info-box p,
 #contact .info-box a {
@@ -343,11 +347,11 @@ a:hover { color: #000000; }
 #contact .info-box a:hover { color: var(--primary-color); }
 
 /* 초소형 화면에서는 라벨과 값이 아래로 스택 */
-@media (max-width: 400px) {
+@media (max-width: 575.98px) {
     #contact .info-box { grid-template-columns: 36px 1fr; }
     #contact .info-box h3 { grid-column: 2 / 3; }
     #contact .info-box p,
-    #contact .info-box a { grid-column: 2 / 3; }
+    #contact .info-box a { grid-column: 2 / 3; margin-left: 0 !important; }
 }
 
 /* Footer */
