@@ -1,0 +1,264 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+
+/* Color & Font Variables (Monochrome theme) */
+:root {
+    /* Grayscale palette (Light Theme) */
+    --bg-color: #ffffff;          /* page background */
+    --surface-1: #ffffff;         /* primary surface */
+    --surface-2: #f6f7f9;         /* elevated surface */
+    --border-color: #e5e7eb;      /* subtle borders */
+    --text-color: #111827;        /* primary text */
+    --text-muted: #6b7280;        /* secondary text */
+    --shadow-color: rgba(0, 0, 0, 0.08);
+    --hero-overlay: 0.6;          /* hero dark overlay opacity */
+
+    /* Neutral accent for icons/links/buttons */
+    --primary-color: #111111;     /* near-black accent */
+
+    /* Legacy fallbacks (if needed by components) */
+    --dark-color: #212529;
+    --light-color: #f8f9fa;
+
+    /* Typography */
+    --font-heading: 'Noto Serif KR', serif;
+    --font-body: 'Poppins', sans-serif;
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--text-color);
+    background: var(--bg-color);
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--text-color); }
+
+/* Navigation Bar */
+.navbar {
+    transition: all 0.3s ease;
+    background: transparent;
+}
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 24px var(--shadow-color);
+}
+/* Default (on hero) - white nav items over darkened image */
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,0.85);
+    transition: color 0.3s ease;
+}
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #ffffff;
+}
+.navbar-dark .navbar-brand { color: #ffffff; }
+.navbar-dark .navbar-toggler { border-color: rgba(255,255,255,0.6); }
+.navbar-dark .navbar-toggler-icon { filter: invert(100%); }
+
+/* When navbar is scrolled on light background, use dark text */
+.navbar.scrolled.navbar-dark .navbar-nav .nav-link {
+    color: rgba(17,17,17,0.8);
+}
+.navbar.scrolled.navbar-dark .navbar-nav .nav-link:hover,
+.navbar.scrolled.navbar-dark .navbar-nav .nav-link.active {
+    color: #000000;
+}
+.navbar.scrolled .navbar-brand { color: #111111; }
+.navbar.scrolled .navbar-toggler { border-color: rgba(0,0,0,0.25); }
+.navbar.scrolled .navbar-toggler-icon { filter: invert(0%); }
+
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,var(--hero-overlay)), rgba(0,0,0,var(--hero-overlay))),
+                url('../assets/images/003.jpg') no-repeat center center/cover;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+}
+/* Ensure hero text is bright over the background */
+#hero h1,
+#hero p,
+#hero .lead {
+    color: #ffffff;
+    text-shadow: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #ffffff;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+.btn-primary:hover {
+    background-color: #000000;
+    border-color: #000000;
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+/* Brand color for icons using Bootstrap's text-primary */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* Section General */
+section {
+    overflow: hidden; /* For AOS animations */
+}
+
+section h2 {
+    font-size: 2.5rem;
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+section h2::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #6e6e6e; /* subtle divider in grayscale */
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Bootstrap background overrides for dark theme sections */
+.bg-light { background-color: var(--surface-1) !important; }
+.bg-dark { background-color: var(--surface-2) !important; }
+
+/* General links */
+a { color: var(--primary-color); }
+a:hover { color: #000000; }
+
+/* Studio Gallery Section */
+#studio-gallery .gallery-item {
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+#studio-gallery .gallery-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px var(--shadow-color);
+}
+#studio-gallery .gallery-item img {
+    display: block;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+#studio-gallery .gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Lessons Section */
+#lessons .card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+#lessons .card .card-title { color: var(--text-color); }
+#lessons .card .card-text { color: var(--text-muted); }
+#lessons .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px var(--shadow-color);
+    border-color: #3a4045;
+}
+
+/* Portfolio Section */
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+.portfolio-item img {
+    transition: transform 0.4s ease;
+}
+.portfolio-item:hover img {
+    transform: scale(1.1);
+}
+.portfolio-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.portfolio-item:hover .portfolio-info {
+    opacity: 1;
+}
+.portfolio-info h4 {
+    margin-bottom: 15px;
+}
+.portfolio-info a {
+    color: white;
+    font-size: 2rem;
+    transition: color 0.3s;
+}
+.portfolio-info a:hover {
+    color: var(--primary-color);
+}
+
+
+/* Contact Section */
+#contact .info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px;
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+#contact .info-box i {
+    font-size: 20px;
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#contact .info-box h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+/* Footer */
+footer { color: var(--text-color) !important; }
+footer a { color: var(--primary-color); }
+footer a:hover { color: #000000; }
