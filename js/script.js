@@ -10,8 +10,10 @@ $(document).ready(function(){
     $(window).scroll(function() {
         if ($(this).scrollTop() > 50) {
             $('.navbar').addClass('scrolled');
+            $('.scroll-indicator, .scroll-hint').css('opacity', 0); // fade out indicator & hint
         } else {
             $('.navbar').removeClass('scrolled');
+            $('.scroll-indicator, .scroll-hint').css('opacity', 1); // show indicator & hint at top
         }
     });
 
@@ -34,6 +36,21 @@ $(document).ready(function(){
     // 4. 모바일 메뉴에서 링크 클릭 시 메뉴 닫기
     $('.navbar-nav>li>a').on('click', function(){
         $('.navbar-collapse').collapse('hide');
+    });
+
+    // 5. Scroll indicator click follows same smooth scrolling rules
+    $('.scroll-indicator').on('click', function(event) {
+        var href = $(this).attr('href');
+        if (href && href.startsWith('#')) {
+            event.preventDefault();
+            var $target = $(href);
+            if ($target.length) {
+                var navHeight = $('.navbar').outerHeight() || 0;
+                var extra = window.matchMedia('(max-width: 576px)').matches ? 8 : 0;
+                var top = $target.offset().top - navHeight - extra;
+                $('html, body').animate({ scrollTop: top }, 800);
+            }
+        }
     });
 
 });
