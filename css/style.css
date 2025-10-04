@@ -1,8 +1,75 @@
+/* --- New Profile Section Styles --- */
+#profile .display-5 {
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+
+#profile .lead {
+    font-size: 1.15rem;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#profile .profile-feature-box {
+    padding: 2rem 1.5rem;
+    background-color: var(--surface-2);
+    border-radius: 1rem;
+    height: 100%;
+    border: 1px solid var(--border-color);
+}
+
+/* keep default section h2 underline for Profile */
+
+/* --- Profile Deep Dive Section Styles --- */
+#profile-details h3 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+#profile-details .career-list {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+    column-count: 2;
+    column-gap: 2rem;
+}
+
+#profile-details .icon-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+#profile-details .icon-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+#profile-details .icon-list i {
+    color: var(--primary-color);
+    margin-right: 1rem;
+    margin-top: 4px;
+}
+
+@media (max-width: 767.98px) {
+    #profile-details .career-list {
+        column-count: 1;
+    }
+    #profile-details h3 {
+        font-size: 1.8rem;
+    }
+}
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
 
 /* Color & Font Variables (Monochrome theme) */
 :root {
+    --navbar-height: 80px; /* fixed navbar height for anchor offset */
     /* Grayscale palette (Light Theme) */
     --bg-color: #ffffff;          /* page background */
     --surface-1: #ffffff;         /* primary surface */
@@ -48,7 +115,9 @@ h1, h2, h3, h4, h5, h6 { color: var(--text-color); }
     background: transparent;
 }
 .navbar.scrolled {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     box-shadow: 0 6px 24px var(--shadow-color);
 }
 /* Default (on hero) - white nav items over darkened image */
@@ -194,25 +263,31 @@ section h2 {
     padding-bottom: 15px;
     margin-bottom: 20px;
 }
-section h2::after {
-    content: '';
-    position: absolute;
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: #6e6e6e; /* subtle divider in grayscale */
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-}
 
 /* Bootstrap background overrides for dark theme sections */
 .bg-light { background-color: var(--surface-1) !important; }
 .bg-dark { background-color: var(--surface-2) !important; }
 
 /* General links */
-a { color: var(--primary-color); }
+a {
+    position: relative;
+    text-decoration: none; /* remove default underline */
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
 a:hover { color: #000000; }
+
+/* Link underline animation for key areas */
+#profile-details a, #contact a, footer a {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px; /* hidden initially */
+    transition: background-size .3s;
+}
+#profile-details a:hover, #contact a:hover, footer a:hover {
+    background-size: 100% 1px; /* reveal on hover */
+}
 
 /* Studio Gallery Section */
 #studio-gallery .gallery-item {
@@ -250,7 +325,8 @@ a:hover { color: #000000; }
 #lessons .card .card-text { color: var(--text-muted); }
 #lessons .card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 16px 40px var(--shadow-color);
+    /* richer shadow for depth */
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.10);
     border-color: #3a4045;
 }
 
@@ -359,8 +435,33 @@ footer { color: var(--text-color) !important; }
 footer a { color: var(--primary-color); }
 footer a:hover { color: #000000; }
 
+/* Profile Section */
+#profile .profile-card {
+    background: var(--surface-1);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+#profile .badge-neutral {
+    background: var(--surface-2);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    font-weight: 500;
+}
+#profile .profile-list { margin: 0; padding-left: 1.1rem; }
+#profile .profile-list li { margin-bottom: 6px; }
+#profile .accordion-button { background: var(--surface-1); color: var(--text-color); }
+#profile .accordion-button:not(.collapsed) { box-shadow: none; background: var(--surface-2); }
+#profile .accordion-item { border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+#profile .accordion-body { background: var(--surface-1); }
+
+@media (max-width: 575.98px) {
+    #profile .profile-card { padding: 12px; }
+}
+
 /* Anchor offset: account for fixed navbar height */
-section { scroll-margin-top: 80px; }
+section { scroll-margin-top: var(--navbar-height); }
 
 /* Navbar collapsed menu background for contrast on hero */
 .navbar-dark .navbar-collapse { background: transparent; }
@@ -388,4 +489,42 @@ section { scroll-margin-top: 80px; }
     .btn-primary { padding: 10px 20px; }
     .navbar .container { padding-left: 12px; padding-right: 12px; }
     .navbar-brand { font-size: 0.95rem; max-width: 70vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+
+/* --- Interactivity & Depth Enhancement --- */
+/* Smooth transitions for cards */
+#profile .profile-feature-box,
+#lessons .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/* Hover lift effect */
+#profile .profile-feature-box:hover,
+#lessons .card:hover {
+    transform: translateY(-8px);
+}
+/* Enrich shadow on profile feature hover */
+#profile .profile-feature-box:hover {
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.10);
+}
+
+/* --- Typography Refinement --- */
+h2, h3, .display-5 {
+    letter-spacing: -0.02em;
+}
+
+/* Profile Deep Dive background gradient for visual comfort */
+#profile-details {
+    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%) !important;
+}
+
+/* --- Eyebrow Style Proposal 3: Simple & Bold Typography --- */
+.section-eyebrow {
+    display: block; /* 공간을 확실히 차지하도록 */
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.15em; /* 자간을 넓혀 존재감 부여 */
+    text-transform: uppercase;
+    color: var(--text-muted); /* 다시 은은한 색으로 변경하여 헤드라인을 돋보이게 */
+    margin-bottom: 0.5rem;
 }
