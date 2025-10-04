@@ -11,7 +11,7 @@
     margin-right: auto;
 }
 
-#profile .profile-feature-box {
+#profile .profile-feature-box:not(.feature-card) {
     padding: 2rem 1.5rem;
     background-color: var(--surface-2);
     border-radius: 1rem;
@@ -542,6 +542,23 @@ h2, h3, .display-5 {
     letter-spacing: -0.02em;
 }
 
+/* === Final CSS for Profile Section (Light Theme) === */
+.feature-card {
+    background-color: var(--surface-2);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 2rem; /* 균형 잡힌 내측 여백 */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 상단 요약 + 하단 리스트 구분 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 32px rgba(0,0,0,0.10);
+}
+
 /* Profile Deep Dive background gradient for visual comfort */
 #profile-details {
     background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%) !important;
@@ -557,4 +574,55 @@ h2, h3, .display-5 {
     text-transform: uppercase;
     color: var(--text-muted); /* 다시 은은한 색으로 변경하여 헤드라인을 돋보이게 */
     margin-bottom: 0.5rem;
+}
+
+/* === Detail list styles inside feature-card (Light) === */
+.detail-list-wrapper { margin-top: 1.25rem; }
+.feature-divider {
+    border: 0;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 1rem 0;
+}
+.feature-detail-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    text-align: left;
+}
+.feature-detail-list li {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 14px;
+}
+.feature-detail-list li:last-child { margin-bottom: 0; }
+.feature-detail-list li::before {
+    content: '+';
+    position: absolute;
+    left: 0;
+    top: 1px;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* === Hero Button Style 3: Glassmorphism Button === */
+.btn-hero {
+     background: rgba(255, 255, 255, 0.15); /* 반투명 흰색 배경 */
+     backdrop-filter: blur(10px);
+     -webkit-backdrop-filter: blur(10px);
+     border: 1px solid rgba(255, 255, 255, 0.2); /* 반투명 흰색 테두리 */
+     border-radius: 1rem; /* 16px 둥근 모서리 */
+     color: #ffffff;
+     font-weight: 600;
+     padding: 12px 30px;
+     transition: all 0.3s ease;
+}
+
+.btn-hero:hover {
+     background: rgba(255, 255, 255, 0.3); /* 호버 시 좀 더 밝게 */
+     border-color: rgba(255, 255, 255, 0.4);
+     transform: translateY(-3px);
+     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
